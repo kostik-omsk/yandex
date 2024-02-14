@@ -1,14 +1,40 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/vite.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Тестовое задание: Адаптивный лендинг с использованием HTML, CSS и JS</title>
   </head>
 
   <body>
-
+    <header class="header">
+      <div class="content-grid">
+          <a class="header__logo" href="/">
+            <img src="./src/assets/svg/logo.svg" alt="Логотип">
+          </a>
+          <div class="header__content content">
+            <div class="content__titles">
+              <h1 class="content__title">Превратите уездный город</h1>
+              <h2 class="content__subtitle">в столицу</h2>
+              <h2 class="content__subsubtitle">земного шара</h2>
+            </div>
+            <p class="content__text">Оплатите взнос на телеграммы для организации Международного васюкинского турнира по шахматам</p>
+            <div class="content__btms">
+              <button class="content__btn content__btn-primary">Поддержать  шахматную мысль</button>
+              <button class="content__btn content__btn-secondary">Подробнее о турнире</button>
+            </div>
+          </div>
+          <div class="header__layers">
+            <div class="layers__item layers-1"></div>
+            <div class="layers__item layers-2"></div>
+            <div class="layers__item layers-3"></div>
+            <div class="layers__item layers-4"></div>
+            <div class="layers__item layers-5"></div>
+            <div class="layers__item layers-6"></div>
+          </div>
+      </div>
+    </header>
     <script type="module" src="/src/js/main.js"></script>
   </body>
 </html>
