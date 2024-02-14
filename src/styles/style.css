@@ -1,19 +1,55 @@
 @import './_variables.css';
+@import './header.css';
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 20rem;
   min-height: 100vh;
-  font-family: var(--font-GolosText-Regular);
+  font-family: var(--font-GolosText);
+  color: var(--color-dark);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-Merriweather-Regular);
+  text-transform: uppercase;
 }
 
 h1 {
   font-size: 3.2rem;
   line-height: 1.1;
+  font-family: var();
 }
 
+.content-grid {
+  --padding-inlain: 1.2rem;
+  --content-max-width: 1222px;
+
+  display: grid;
+  grid-template-columns:
+    [full-width-start] minmax(var(--padding-inlain), 1fr)
+    [content-start] min(
+      100% - (var(--padding-inlain) * 2),
+      var(--content-max-width)
+    )
+    [content-end]
+    minmax(var(--padding-inlain), 1fr) [full-width-end];
+  overflow-x: hidden;
+}
+
+.content-grid > :not(.full-width),
+.full-width > :not(.full-width) {
+  grid-column: content;
+}
+
+.content-grid .full-width {
+  grid-column: full-width;
+  padding: var(--padding-inlain);
+  display: grid;
+  grid-template-columns: inherit;
+}
 
 @media (prefers-color-scheme: light) {
   :root {

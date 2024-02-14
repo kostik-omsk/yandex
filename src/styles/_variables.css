@@ -1,22 +1,6 @@
-
 @font-face {
-  font-family: 'GolosText-Regular';
-  src: url('../assets/fonts/GolosText-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'GolosText-Medium';
-  src: url('../assets/fonts/GolosText-Medium.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'GolosText-Bold';
-  src: url('../assets/fonts/GolosText-Bold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'GolosText-SemiBold';
-  src: url('../assets/fonts/GolosText-SemiBold.ttf') format('truetype');
+  font-family: 'GolosText';
+  src: url('../assets/fonts/GolosText.ttf') format('truetype');
 }
 
 @font-face {
@@ -29,23 +13,21 @@
   src: url('../assets/fonts/Merriweather-Regular.ttf') format('truetype');
 }
 
-
 :root {
   /* colors */
-  --color-light: #FFFFFF;
+  --color-light: #ffffff;
   --color-dark: #313131;
-  --color-primary: #1F1F1F;
-  --color-primary-hover: #FBCE51;
-  --color-secondary: #F54932;
+  --color-primary: #1f1f1f;
+  --color-primary-hover: #fbce51;
+  --color-secondary: #f54932;
   --color-logo: #595653;
   --color-logo-vanilla-shadow: #f7df1eaa;
-  --color-button-hover: #3057A2;
+  --color-button-hover: #3057a2;
 
   /* fonts */
-  --font-GolosText-Regular: 'GolosText-Regular';
-  --font-GolosText-Medium: 'GolosText-Medium';
-  --font-GolosText-Bold: 'GolosText-Bold';
-  --font-GolosText-SemiBold: 'GolosText-SemiBold';
+  --font-GolosText: 'GolosText';
   --font-Merriweather-Bold: 'Merriweather-Bold';
   --font-Merriweather-Regular: 'Merriweather-Regular';
+
+  --index: calc(1vw + 1vh);
 }
