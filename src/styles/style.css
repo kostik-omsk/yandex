@@ -1,5 +1,6 @@
 @import './_variables.css';
 @import './header.css';
+@import './marquee.css';
 
 body {
   min-height: 100vh;
