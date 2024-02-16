@@ -1,0 +1,149 @@
+.tourney {
+  margin-top: clamp(48px, 6vw, 80px);
+}
+
+.tourney__content {
+  position: relative;
+}
+
+.tourney__header {
+  margin-top: 30px;
+  max-width: 764px;
+}
+
+.tourney__description {
+  font-family: var(--font-Merriweather-Regular);
+  font-size: clamp(28px, 6vw, 36px);
+  line-height: 135%;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.tourney__description span {
+  font-family: var(--font-Merriweather-Bold);
+  color: var(--color-secondary);
+}
+
+.tourney__pic {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.tourney__body {
+  display: flex;
+  gap: 16px;
+  margin-top: clamp(21px, 6vw, 40px);
+}
+
+.tourney__img {
+  margin-left: -28px;
+  flex-shrink: 0;
+}
+
+.tourney__info {
+  margin-top: 50px;
+}
+
+.event {
+  margin-top: clamp(41px, 6vw, 60px);
+  margin-bottom: clamp(38px, 6vw, 46px);
+}
+
+.event__info {
+  display: flex;
+  padding: 15px 0;
+  position: relative;
+  border-bottom: 2px solid rgb(208, 208, 208);
+}
+
+.event__info:first-child {
+  padding: 0 0 16px;
+}
+
+.event__info:last-child {
+  border-bottom: none;
+  padding: 16px 0 0;
+}
+
+.info__title {
+  display: block;
+  opacity: 0.7;
+  font-size: 20px;
+  line-height: 120%;
+}
+
+.info__details {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 120%;
+}
+
+@media only screen and (min-width: 700px) {
+  .info__title {
+    flex: 0 0 46%;
+  }
+
+  .info__details::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 43.5%;
+    border-left: 2px solid rgb(208, 208, 208);
+  }
+}
+
+.strikethrough {
+  text-decoration: line-through;
+  text-decoration-color: red;
+}
+
+.tourney__link {
+  color: var(--color-button-hover);
+  font-size: clamp(18px, 4vw, 20px);
+}
+
+@media only screen and (max-width: 1214px) {
+  .tourney__header {
+    margin-top: 0px;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .tourney__header > * {
+    margin-bottom: 23px;
+    display: block;
+  }
+
+  .tourney__pic {
+    position: relative;
+  }
+
+  .tourney__body {
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+  }
+
+  .tourney__info {
+    margin-top: -35px;
+    max-width: 764px;
+  }
+
+  .tourney__img {
+    margin-left: 0px;
+    flex-shrink: 1;
+  }
+
+  .event__info {
+    flex-wrap: wrap;
+    row-gap: 12px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .tourney__img {
+    width: 110%;
+  }
+}
