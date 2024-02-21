@@ -1,0 +1,268 @@
+.stages {
+  margin-top: 102px;
+  height: 1500px;
+}
+
+.stages .content-grid {
+  overflow: hidden;
+}
+
+.stages__wrapp {
+  position: relative;
+}
+
+.stages__header {
+  max-width: 806px;
+  margin-bottom: 55px;
+}
+
+.stages__title {
+  display: inline;
+  font-size: clamp(34px, 6vw, 54px);
+  line-height: 120%;
+  text-align: left;
+}
+
+.stages__subtitle {
+  display: inline-block;
+  max-width: 280px;
+  margin-left: 15px;
+  font-size: clamp(18px, 4vw, 20px);
+  line-height: 120%;
+  color: var(--color-button-hover);
+}
+
+.stages__slider-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.stages__img {
+  position: absolute;
+  right: -63px;
+  bottom: -6px;
+  z-index: 10;
+}
+
+.stages__container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, max-content);
+  gap: 20px 20px;
+  grid-template-areas:
+    'block1 block1 block2'
+    'block3 block3 block2'
+    'block4 block5 block5';
+}
+
+.block-1 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  gap: 20px 20px;
+  grid-template-areas: 'One Two';
+  grid-area: block1;
+}
+
+.one {
+  grid-area: One;
+}
+
+.two {
+  grid-area: Two;
+}
+
+.block-2 {
+  grid-area: block2;
+}
+
+.block-3 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  gap: 20px 20px;
+  grid-template-areas: 'Four Five';
+  grid-area: block3;
+}
+
+.four {
+  grid-area: Four;
+}
+
+.five {
+  grid-area: Five;
+}
+
+.block-4 {
+  grid-area: block4;
+}
+
+.block-5 {
+  grid-area: block5;
+}
+
+.stage {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  gap: 16px;
+  padding: 20px 21px;
+  background: #e9ded4 url(../assets/images/image-bg.webp);
+  background-blend-mode: color-burn;
+}
+
+.stage__number {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-light);
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 36px;
+}
+
+.stage__text {
+  max-width: 446px;
+  font-size: clamp(18px, 2.1vw, 20px);
+  font-weight: 500;
+  line-height: 120%;
+}
+
+.pagination {
+  display: none;
+}
+
+@media only screen and (max-width: 1274px) {
+  .stages__container {
+    grid-template-columns: repeat(2, 394px);
+    grid-template-areas:
+      'block1  block2'
+      'block1  block2'
+      'block3  block3'
+      'block4  block4'
+      'block5  block5';
+    justify-content: center;
+  }
+
+  .block-1 {
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content;
+    grid-template-areas:
+      'One'
+      'Two';
+  }
+
+  .stages__img {
+    right: calc(100% - var(--index) * 52);
+    bottom: 30px;
+  }
+}
+
+@media only screen and (max-width: 849px) {
+  .stages__header {
+    margin-bottom: 0px;
+  }
+
+  .stages__img {
+    position: relative;
+    top: 21px;
+    left: 10px;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    width: 330px;
+    transform: rotate(-3.73deg);
+    z-index: 10;
+  }
+
+  .stages__slider-wrap {
+    max-width: 335px;
+    margin: 0 auto;
+    margin-top: -48px;
+    overflow: hidden;
+    display: flex;
+  }
+
+  .stages__container {
+    grid-template-columns: repeat(5, 335px);
+    grid-template-rows: 300px;
+    grid-template-areas: 'block1 block2 block3 block4 block5';
+    justify-content: start;
+    gap: 0px;
+    transition: transform 0.7s ease-out;
+    will-change: transform;
+  }
+
+  .block-1 {
+    gap: 0px;
+  }
+
+  .block-3 {
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content;
+    grid-template-areas:
+      'Four'
+      'Five';
+    gap: 0px;
+  }
+
+  .stage {
+    padding-top: 62px;
+  }
+
+  .one,
+  .four {
+    padding-bottom: 31px;
+  }
+
+  .two,
+  .five {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  .pagination {
+    margin-top: 28px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .pagination__list {
+    margin: 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .pagination__item {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #d9d9d9;
+  }
+
+  .pagination__item-active {
+    background: var(--color-primary);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .stages {
+    margin-top: 121px;
+  }
+
+  .stages__title {
+    display: block;
+    letter-spacing: 1.6px;
+    margin-bottom: 10px;
+  }
+
+  .stages__subtitle {
+    display: inline-block;
+    max-width: max-content;
+    margin-left: 0px;
+    line-height: 120%;
+  }
+}
