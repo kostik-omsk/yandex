@@ -2,6 +2,7 @@
 @import './header.css';
 @import './marquee.css';
 @import './tourney.css';
+@import './stages.css';
 
 body {
   font-family: var(--font-GolosText);
@@ -16,12 +17,6 @@ h5,
 h6 {
   font-family: var(--font-Merriweather-Regular);
   text-transform: uppercase;
-}
-
-h1 {
-  font-size: 3.2rem;
-  line-height: 1.1;
-  font-family: var();
 }
 
 .content-grid {
@@ -41,16 +36,50 @@ h1 {
   grid-column: content;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: var(--color-dark);
-    background-color: var(--color-light);
+.pagination__btn {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  cursor: pointer;
+}
+
+.pagination__btn:hover {
+  background: var(--color-primary-hover);
+}
+
+.pagination__btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-right: 2px solid var(--color-light);
+  border-bottom: 2px solid var(--color-light);
+  transform: translate(-70%, -50%) rotate(-45deg);
+  z-index: 2;
+}
+
+.pagination__btn:disabled {
+  background: var(--color-primary);
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.pagination__btn--prev {
+  transform: rotate(180deg);
+}
+
+@media only screen and (max-width: 849px) {
+  .pagination__btn {
+    width: 36px;
+    height: 36px;
   }
-  .author:hover {
-    color: var(--color-primary-hover);
-  }
-  button,
-  .gitRepo {
-    background-color: var(--color-button-light);
+  .pagination__btn::after {
+    width: 10px;
+    height: 10px;
   }
 }
