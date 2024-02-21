@@ -1,13 +1,14 @@
 /* eslint-disable no-console */
 export default function usePaginationStages() {
+  const sliderWrap = document.querySelector('.stages__slider-wrap');
   const stages = document.querySelector('.stages__container');
   const btnPrev = document.querySelector('.pagination__btn--prev');
   const btnNext = document.querySelector('.pagination__btn--next');
   const paginationList = document.querySelectorAll('.pagination__item');
 
-  const slidWidth = 335;
   const numberSlides = 5;
   let currentSlide = 1;
+  let slidWidth = sliderWrap.offsetWidth;
 
   function disableBtn() {
     btnPrev.disabled = currentSlide === 1;
@@ -46,11 +47,13 @@ export default function usePaginationStages() {
   window.addEventListener('resize', () => {
     const screenWidth = window.innerWidth;
     const isMobile = screenWidth < 849;
+    slidWidth = sliderWrap.offsetWidth;
     if (!isMobile) {
-      console.log('resize');
       stages.style.transform = `translateX(0px)`;
       currentSlide = 1;
       updateStageAndPagination();
+    } else {
+      stages.style.transform = `translateX(-${slidWidth * (currentSlide - 1)}px)`;
     }
   });
 }

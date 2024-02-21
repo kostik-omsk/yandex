@@ -1,6 +1,5 @@
 .stages {
   margin-top: 102px;
-  height: 1500px;
 }
 
 .stages .content-grid {
@@ -125,7 +124,7 @@
 
 .stage__text {
   max-width: 446px;
-  font-size: clamp(18px, 2.1vw, 20px);
+  font-size: clamp(18px, 4vw, 20px);
   font-weight: 500;
   line-height: 120%;
 }
@@ -161,6 +160,10 @@
 }
 
 @media only screen and (max-width: 849px) {
+  :root {
+    --width-slide: clamp(335px, 7.834rem + 55.907vw, 500px);
+  }
+
   .stages__header {
     margin-bottom: 0px;
   }
@@ -178,7 +181,7 @@
   }
 
   .stages__slider-wrap {
-    max-width: 335px;
+    width: var(--width-slide);
     margin: 0 auto;
     margin-top: -48px;
     overflow: hidden;
@@ -186,7 +189,7 @@
   }
 
   .stages__container {
-    grid-template-columns: repeat(5, 335px);
+    grid-template-columns: repeat(5, var(--width-slide));
     grid-template-rows: 300px;
     grid-template-areas: 'block1 block2 block3 block4 block5';
     justify-content: start;
