@@ -45,14 +45,11 @@ export default function useCarouselPlayers() {
     }
   }
 
-  // Добавляем обработчик события resize
-  window.addEventListener('resize', handleResize);
-
   function createCard(card) {
     const cardElem = document.createElement('div');
     cardElem.classList.add('cards__item');
     cardElem.innerHTML = `
-    <img src="${card.photo}" alt="Игрок" />
+    <img src="${card.photo}" alt="Игрок">
     <div class="cards__info">
       <p class="cards__name">${card.name}</p>
       <p class="cards__description">${card.description}</p>
@@ -132,6 +129,8 @@ export default function useCarouselPlayers() {
   BTN_PREV.addEventListener('click', () => {
     handleButtonClick(false);
   });
+
+  window.addEventListener('resize', handleResize);
 
   // Auto sliding
   const slideTiming = 4000;
