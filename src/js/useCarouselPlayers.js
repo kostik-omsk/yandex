@@ -1,45 +1,56 @@
-/* eslint-disable no-plusplus */
 /* eslint-disable no-use-before-define */
 
 import players from './players';
 
 export default function useCarouselPlayers() {
   const CAROUSEL = document.querySelector('#carousel');
-  const LIST_RIGHT = document.querySelector('#cards__list-right');
-  const LIST_ACTIVE = document.querySelector('#cards__list-active');
-  const LIST_LEFT = document.querySelector('#cards__list-left');
+  const PAGINATION = document.querySelector('#pagination');
   const BTN_PREV = document.querySelector('#prev');
   const BTN_NEXT = document.querySelector('#next');
   const SHOWN_NUMBER = document.querySelector('#shown-number');
   const QUANTITY = document.querySelector('#quantity');
 
-  const startWidth = window.innerWidth;
-  const countCards = getCountCards(startWidth);
-  let order = 1;
-  let showcard = countCards;
+  const playersLength = players.length;
+  let countCards = getCountCards(window.innerWidth);
+  let showCard = countCards;
+
+  let cards = createCardList(countCards, playersLength, players);
+  cards.forEach((element) => CAROUSEL.append(element));
 
   QUANTITY.innerHTML = `&#47;${players.length}`;
-  SHOWN_NUMBER.innerHTML = `${showcard}`;
-  let startCards = generatorCardsSet(players, countCards, order);
-
-  let prevSlide = startCards[0];
-  let activSlide = startCards[1];
-  let nextSlide = startCards[2];
+  SHOWN_NUMBER.innerHTML = `${showCard}`;
 
   function getCountCards(screenWidth) {
     if (screenWidth > 1200) {
       return 3;
     }
-    if (screenWidth < 740) {
+    if (screenWidth < 789) {
       return 1;
     }
     return 2;
   }
 
+  function handleResize() {
+    const newCountCards = getCountCards(window.innerWidth);
+
+    if (newCountCards !== countCards) {
+      countCards = newCountCards;
+      showCard = newCountCards;
+      cards = createCardList(countCards, playersLength, players);
+
+      CAROUSEL.innerHTML = '';
+      cards.forEach((element) => CAROUSEL.append(element));
+
+      SHOWN_NUMBER.innerHTML = `${showCard}`;
+    }
+  }
+
+  // Добавляем обработчик события resize
+  window.addEventListener('resize', handleResize);
+
   function createCard(card) {
     const cardElem = document.createElement('div');
     cardElem.classList.add('cards__item');
-    cardElem.dataset.showcard = `${card.name}`;
     cardElem.innerHTML = `
     <img src="${card.photo}" alt="Игрок" />
     <div class="cards__info">
@@ -51,78 +62,101 @@ export default function useCarouselPlayers() {
     return cardElem;
   }
 
-  function generatorCardsSet(arr, count, activSlideOrder) {
-    const totalPlayers = arr.length;
-    const activIndex = activSlideOrder - 1;
+  function createCardList(number, quantity, arr) {
+    const elements = [];
+    const step = Math.floor(quantity / number);
 
-    const prevIndex = (activIndex - count + totalPlayers) % totalPlayers;
-    const nextIndex = (activIndex + count) % totalPlayers;
+    for (let i = 0; i < step; i += 1) {
+      const cardsList = document.createElement('li');
+      cardsList.classList.add('cards__list');
+      if (i === 0) cardsList.classList.add('is-selected');
 
-    const prevSlideSet = [];
-    const activSlideSet = [];
-    const nextSlideSet = [];
+      for (let j = 0; j < number; j += 1) {
+        cardsList.append(createCard(arr[i * number + j]));
+      }
 
-    for (let i = 0; i < count; i++) {
-      prevSlideSet.push(players[(prevIndex + i) % totalPlayers]);
-      activSlideSet.push(players[(activIndex + i) % totalPlayers]);
-      nextSlideSet.push(players[(nextIndex + i) % totalPlayers]);
+      if (i === step - 1) {
+        elements.unshift(cardsList);
+      } else {
+        elements.push(cardsList);
+      }
     }
 
-    return [prevSlideSet, activSlideSet, nextSlideSet];
+    if (step < countCards) {
+      elements.push(elements[0].cloneNode(true));
+    }
+
+    return elements;
   }
 
-  function renderCardsList(cards) {
-    LIST_LEFT.innerHTML = '';
-    LIST_ACTIVE.innerHTML = '';
-    LIST_RIGHT.innerHTML = '';
-
-    cards[0].forEach((card) => LIST_LEFT.append(createCard(card)));
-    cards[1].forEach((card) => LIST_ACTIVE.append(createCard(card)));
-    cards[2].forEach((card) => LIST_RIGHT.append(createCard(card)));
-  }
-  function handleAnimationEnd(animationName) {
-    CAROUSEL.classList.remove(`transition-${animationName}`);
-    [prevSlide, activSlide, nextSlide] = startCards;
-    renderCardsList([prevSlide, activSlide, nextSlide]);
+  function counterShowcard(isNext) {
+    showCard += isNext ? countCards : -countCards;
+    if (showCard > players.length) showCard = isNext ? countCards : players.length;
+    if (showCard === 0) showCard = players.length;
+    SHOWN_NUMBER.innerHTML = `${showCard}`;
   }
 
   function handleButtonClick(isNext) {
-    BTN_PREV.disabled = true;
-    BTN_NEXT.disabled = true;
-    CAROUSEL.classList.add(`transition-${isNext ? 'right' : 'left'}`);
-    order = (order + (isNext ? countCards : -countCards) + players.length) % players.length;
-    showcard += isNext ? countCards : -countCards;
-    if (showcard > players.length) showcard = isNext ? countCards : players.length;
-    if (showcard === 0) showcard = players.length;
-    SHOWN_NUMBER.innerHTML = `${showcard}`;
-  }
+    cards = [...CAROUSEL.children];
+    const currSlide = CAROUSEL.querySelector('.is-selected');
+    currSlide.classList.remove('is-selected');
+    let targetSlide;
 
-  function handleNextClick() {
-    handleButtonClick(true);
-  }
+    if (isNext) {
+      targetSlide = currSlide.nextElementSibling;
 
-  function handlePrevClick() {
-    handleButtonClick(false);
-  }
+      if (countCards === 3) {
+        CAROUSEL.append(cards[1]);
+      } else {
+        CAROUSEL.append(cards[0]);
+      }
+    } else {
+      targetSlide = currSlide.previousElementSibling;
 
-  BTN_NEXT.addEventListener('click', handleNextClick);
-  BTN_PREV.addEventListener('click', handlePrevClick);
-
-  CAROUSEL.addEventListener('animationend', (animationEvent) => {
-    startCards = generatorCardsSet(players, countCards, order);
-    if (
-      animationEvent.animationName === 'move-right' ||
-      animationEvent.animationName === 'move-left'
-    ) {
-      const animationDirection = animationEvent.animationName.replace('move-', '');
-      handleAnimationEnd(animationDirection);
-      BTN_PREV.disabled = false;
-      BTN_NEXT.disabled = false;
+      if (countCards === 3) {
+        CAROUSEL.prepend(cards[cards.length - 2]);
+      } else {
+        CAROUSEL.prepend(cards[cards.length - 1]);
+      }
     }
+
+    targetSlide.classList.add('is-selected');
+
+    counterShowcard(isNext);
+  }
+
+  BTN_NEXT.addEventListener('click', () => {
+    handleButtonClick(true);
   });
 
-  renderCardsList(startCards);
-  // setInterval(() => {
-  //   handleButtonClick(true);
-  // }, 4000);
+  BTN_PREV.addEventListener('click', () => {
+    handleButtonClick(false);
+  });
+
+  // Auto sliding
+  const slideTiming = 4000;
+  let interval;
+
+  const slideNext = () => {
+    BTN_NEXT.dispatchEvent(new Event('click'));
+  };
+
+  const startSlideInterval = () => {
+    interval = setTimeout(() => {
+      slideNext();
+      startSlideInterval();
+    }, slideTiming);
+  };
+
+  const stopSlideInterval = () => {
+    clearTimeout(interval);
+  };
+
+  CAROUSEL.addEventListener('mouseover', stopSlideInterval);
+  PAGINATION.addEventListener('mouseover', stopSlideInterval);
+
+  CAROUSEL.addEventListener('mouseleave', startSlideInterval);
+  PAGINATION.addEventListener('mouseleave', startSlideInterval);
+
+  startSlideInterval();
 }
