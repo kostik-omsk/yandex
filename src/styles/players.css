@@ -1,0 +1,167 @@
+.players {
+  margin-top: 200px;
+  margin-bottom: 100px;
+}
+
+.players .content-grid {
+  position: relative;
+}
+
+.players__header {
+  margin-bottom: 60px;
+}
+
+.players__title {
+  font-size: clamp(34px, 6vw, 54px);
+  line-height: 120%;
+}
+
+.carousel {
+  margin: 0 auto;
+  width: 100%;
+  overflow: hidden;
+}
+
+.cards {
+  position: relative;
+  height: 465px;
+}
+
+.cards__list {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  gap: 79px;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-out;
+}
+
+.cards__list.is-selected {
+  transform: translateX(0);
+}
+
+.cards__list.is-selected ~ .cards__list {
+  transform: translateX(100%);
+}
+
+.cards__item {
+  display: flex;
+  min-width: 335px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cards__info {
+  margin-bottom: 19px;
+}
+
+.cards__name {
+  margin-top: 27px;
+  margin-bottom: 6px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.cards__description {
+  text-align: center;
+  font-size: 20px;
+  opacity: 0.6;
+}
+
+.cards__btn {
+  padding: 8px 12px;
+  border: 1px solid var(--color-button-hover);
+  border-radius: 62px;
+  color: var(--color-button-hover);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 120%;
+  transition: all 0.5s;
+}
+
+.cards__btn:hover {
+  color: var(--color-light);
+  background-color: var(--color-button-hover);
+}
+
+.players__pagination.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+#quantity {
+  opacity: 0.6;
+  letter-spacing: 1px;
+}
+
+.transition-right {
+  animation-name: move-right;
+  animation-duration: 3s;
+}
+
+.transition-left {
+  animation-name: move-left;
+  animation-duration: 3s;
+}
+
+@keyframes move-right {
+  from {
+    left: -1213px;
+  }
+  to {
+    left: -2455px;
+  }
+}
+
+@keyframes move-left {
+  from {
+    left: -1213px;
+  }
+  to {
+    left: 30px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .players__pagination.pagination {
+    position: absolute;
+    right: 0;
+    top: 9px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .players__pagination.pagination {
+    margin-top: 40px;
+  }
+}
+
+@media only screen and (max-width: 598px) {
+  .players {
+    margin-top: 120px;
+  }
+
+  .players__header {
+    margin-bottom: 37px;
+  }
+
+  .players__title {
+    letter-spacing: 1.4px;
+  }
+
+  .cards {
+    height: 388px;
+  }
+
+  .cards__item {
+    margin-bottom: 0;
+  }
+
+  .cards__item img {
+    width: 246px;
+  }
+}

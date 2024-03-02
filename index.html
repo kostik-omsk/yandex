@@ -174,7 +174,7 @@
               </div>
             </div>
             <div class="stages__pagination pagination">
-              <button class="pagination__btn pagination__btn--prev" disabled></button>
+              <button type="button" class="pagination__btn pagination__btn--prev" disabled></button>
               <ul class="pagination__list">
                 <li class="pagination__item"></li>
                 <li class="pagination__item"></li>
@@ -182,8 +182,27 @@
                 <li class="pagination__item"></li>
                 <li class="pagination__item"></li>
               </ul>
-              <button class="pagination__btn pagination__btn--next"></button>
+              <button type="button" class="pagination__btn pagination__btn--next"></button>
             </div>
+          </div>
+        </div>
+      </section>
+      <section class="players">
+        <div class="content-grid">
+          <div class="players__header">
+            <h3 class="players__title">Участники турнира</h3>
+          </div>
+          <div class="players__carousel carousel">
+            <ul class="carousel__cards cards" id="carousel">
+            </ul>
+          </div>
+          <div class="players__pagination pagination" id="pagination">
+            <button class="pagination__btn pagination__btn--prev" id="prev"></button>
+            <p class="pagination__quantity">
+              <span id="shown-number"></span>
+              <span id="quantity"></span>
+            </p>
+            <button class="pagination__btn pagination__btn--next" id="next"></button>
           </div>
         </div>
       </section>

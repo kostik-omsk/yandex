@@ -3,6 +3,7 @@
 @import './marquee.css';
 @import './tourney.css';
 @import './stages.css';
+@import './players.css';
 
 body {
   font-family: var(--font-GolosText);
