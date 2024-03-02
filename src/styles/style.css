@@ -4,6 +4,7 @@
 @import './tourney.css';
 @import './stages.css';
 @import './players.css';
+@import './footer.css';
 
 body {
   font-family: var(--font-GolosText);

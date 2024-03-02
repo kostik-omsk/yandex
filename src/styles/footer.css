@@ -1,0 +1,15 @@
+.footer {
+  background-color: #e9ded4;
+}
+
+.footer__text {
+  margin-top: 40px;
+  margin-bottom: 68px;
+}
+
+@media only screen and (max-width: 768px) {
+  .footer__text {
+    line-height: 19.2px;
+    margin-bottom: 59px;
+  }
+}
