@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-use-before-define */
 
 import players from './players';
@@ -61,7 +62,7 @@ export default function useCarouselPlayers() {
 
   function createCardList(number, quantity, arr) {
     const elements = [];
-    const step = Math.floor(quantity / number);
+    const step = Math.ceil(quantity / number);
 
     for (let i = 0; i < step; i += 1) {
       const cardsList = document.createElement('li');
@@ -69,7 +70,10 @@ export default function useCarouselPlayers() {
       if (i === 0) cardsList.classList.add('is-selected');
 
       for (let j = 0; j < number; j += 1) {
-        cardsList.append(createCard(arr[i * number + j]));
+        const index = i * number + j;
+        if (index < quantity) {
+          cardsList.append(createCard(arr[index]));
+        }
       }
 
       if (i === step - 1) {
@@ -81,43 +85,62 @@ export default function useCarouselPlayers() {
 
     if (step < countCards) {
       elements.push(elements[0].cloneNode(true));
+      const last = elements[1].cloneNode(true);
+      last.classList.remove('is-selected');
+      elements.push(last);
     }
 
     return elements;
   }
 
   function counterShowcard(isNext) {
-    showCard += isNext ? countCards : -countCards;
-    if (showCard > players.length) showCard = isNext ? countCards : players.length;
-    if (showCard === 0) showCard = players.length;
+    const totalCards = players.length;
+
+    if (isNext) {
+      const cardsRemaining = totalCards - showCard;
+      showCard += Math.min(cardsRemaining || countCards, countCards);
+
+      if (showCard > totalCards) {
+        showCard = countCards;
+      }
+    } else {
+      const cardsRemaining = totalCards % countCards;
+
+      if (showCard === countCards) {
+        showCard = totalCards;
+      } else if (showCard === totalCards) {
+        showCard -= cardsRemaining || countCards;
+      } else {
+        showCard -= countCards;
+      }
+    }
+
     SHOWN_NUMBER.innerHTML = `${showCard}`;
   }
 
   function handleButtonClick(isNext) {
     cards = [...CAROUSEL.children];
     const currSlide = CAROUSEL.querySelector('.is-selected');
+    const currentIndex = cards.indexOf(currSlide);
     currSlide.classList.remove('is-selected');
-    let targetSlide;
+
+    let targetIndex;
 
     if (isNext) {
-      targetSlide = currSlide.nextElementSibling;
-
-      if (countCards === 3) {
-        CAROUSEL.append(cards[1]);
-      } else {
-        CAROUSEL.append(cards[0]);
-      }
+      targetIndex = currentIndex < cards.length - 1 ? currentIndex + 1 : 0;
     } else {
-      targetSlide = currSlide.previousElementSibling;
-
-      if (countCards === 3) {
-        CAROUSEL.prepend(cards[cards.length - 2]);
-      } else {
-        CAROUSEL.prepend(cards[cards.length - 1]);
-      }
+      targetIndex = currentIndex > 0 ? currentIndex - 1 : cards.length - 1;
     }
 
+    const targetSlide = cards[targetIndex];
+
     targetSlide.classList.add('is-selected');
+
+    if (isNext) {
+      CAROUSEL.appendChild(cards.shift());
+    } else {
+      CAROUSEL.insertBefore(cards.pop(), cards[0]);
+    }
 
     counterShowcard(isNext);
   }

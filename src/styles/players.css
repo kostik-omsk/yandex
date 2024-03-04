@@ -79,6 +79,7 @@
   font-weight: 500;
   line-height: 120%;
   transition: all 0.5s;
+  cursor: pointer;
 }
 
 .cards__btn:hover {
@@ -100,16 +101,6 @@
 #quantity {
   opacity: 0.6;
   letter-spacing: 1px;
-}
-
-.transition-right {
-  animation-name: move-right;
-  animation-duration: 3s;
-}
-
-.transition-left {
-  animation-name: move-left;
-  animation-duration: 3s;
 }
 
 @media only screen and (min-width: 1024px) {
