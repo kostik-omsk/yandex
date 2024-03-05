@@ -4,7 +4,11 @@
 @import './tourney.css';
 @import './stages.css';
 @import './players.css';
+@import './footer.css';
 
+html {
+  scroll-behavior: smooth;
+}
 body {
   font-family: var(--font-GolosText);
   color: var(--color-dark);

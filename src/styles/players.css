@@ -1,6 +1,6 @@
 .players {
   margin-top: 200px;
-  margin-bottom: 100px;
+  margin-bottom: 136px;
 }
 
 .players .content-grid {
@@ -79,6 +79,7 @@
   font-weight: 500;
   line-height: 120%;
   transition: all 0.5s;
+  cursor: pointer;
 }
 
 .cards__btn:hover {
@@ -90,40 +91,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 14px;
+}
+
+.pagination__quantity {
+  min-width: 34px;
 }
 
 #quantity {
   opacity: 0.6;
   letter-spacing: 1px;
-}
-
-.transition-right {
-  animation-name: move-right;
-  animation-duration: 3s;
-}
-
-.transition-left {
-  animation-name: move-left;
-  animation-duration: 3s;
-}
-
-@keyframes move-right {
-  from {
-    left: -1213px;
-  }
-  to {
-    left: -2455px;
-  }
-}
-
-@keyframes move-left {
-  from {
-    left: -1213px;
-  }
-  to {
-    left: 30px;
-  }
 }
 
 @media only screen and (min-width: 1024px) {
@@ -143,6 +120,7 @@
 @media only screen and (max-width: 598px) {
   .players {
     margin-top: 120px;
+    margin-bottom: 101px;
   }
 
   .players__header {
