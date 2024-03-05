@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-use-before-define */
 
-import players from './players';
+import players from '../players';
 
 export default function useCarouselPlayers() {
   const CAROUSEL = document.querySelector('#carousel');
