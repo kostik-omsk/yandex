@@ -1,4 +1,4 @@
-import img from '../assets/images/player.png';
+import img from '../assets/images/player.webp';
 
 export default [
   {
